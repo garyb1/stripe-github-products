@@ -1,7 +1,7 @@
-import getFileHash from './getFileHash';
-import octokit, { owner, repo } from './githubConfig.js';
+const  getFileHash = require('./getFileHash.js');
+const { octokit, owner, repo } = require('./githubConfig.js');
 
-export default async function updateGithubFile(path = 'test.json', data) {
+async function updateGithubFile(path = 'test.json', data) {
     const sha = await getFileHash(owner, repo, path);
     const message = `Updating Product Info for File: ${path}`;
     const dataString = JSON.stringify(data);
@@ -14,5 +14,7 @@ export default async function updateGithubFile(path = 'test.json', data) {
         sha,
         message,
         content: dateBase64
-        });
+    });
 }
+
+module.exports = updateGithubFile;
