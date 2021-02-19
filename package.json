@@ -5,7 +5,7 @@
   "scripts": {
     "build-products": "node lib/combineProducts.js",
     "dev": "next dev",
-    "build": "npm run build-products && next build",
+    "build": "npm run build-products && cd functions/ && npm i && cd ../ && next build",
     "start": "next start"
   },
   "dependencies": {
