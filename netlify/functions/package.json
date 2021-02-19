@@ -1,0 +1,15 @@
+{
+  "name": "functions",
+  "version": "1.0.0",
+  "description": "Used to update the github api with a given owner, repo, and path",
+  "main": "productCreateOrUpdate.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Gary Byrne <garyb1@live.ie>",
+  "license": "ISC",
+  "dependencies": {
+    "@octokit/rest": "^18.2.0"
+  }
+}

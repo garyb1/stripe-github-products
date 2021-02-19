@@ -1,0 +1,16 @@
+{
+  "price_1IMbM0Bm4OjItdqcTewLihLT": {
+    "id": "price_1IMbM0Bm4OjItdqcTewLihLT",
+    "title": "JS Tshirt",
+    "description": "Bring the ultimate dev swag with this JS Tshirt",
+    "currency": "eur",
+    "price": 25
+  },
+  "price_1IMbWFBm4OjItdqcaN6Lq1qm": {
+    "id": "price_1IMbWFBm4OjItdqcaN6Lq1qm",
+    "title": "CSS Stickers",
+    "description": "Add some flare to your laptop with a sticker of the CSS logo.t",
+    "currency": "eur",
+    "price": 10
+  }
+}
