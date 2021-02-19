@@ -1,11 +1,8 @@
-const updateGithubFile = require('./utils/updateGithubFile.js');
-exports.handler = async function ({ body, headers }) {
-   console.log({
-        body, headers
-    })
+const createGithubFile = require('./utils/createGithubFile.js');
+exports.handler = async function () {
   let response;
   try {
-    response = updateGithubFile('test3.json', { test: true });
+    response = createGithubFile('test3.json', { test: true });
   }
   catch (err) {
     return {
