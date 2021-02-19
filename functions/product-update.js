@@ -1,5 +1,4 @@
 const updateGithubFile = require('./utils/updateGithubFile.js');
-
 exports.handler = async function () {
   let response;
   try {
