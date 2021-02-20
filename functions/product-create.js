@@ -1,8 +1,13 @@
 const createGithubFile = require('./utils/createGithubFile.js');
-exports.handler = async function () {
+
+exports.handler = async function ({ body }) {
+  const { data } = JSON.parse(body);
+  const { id } = data.object;
+
   let response;
+
   try {
-    response = createGithubFile('test3.json', { test: true });
+    response = await createGithubFile(`lib/shared/products/${id}.json`, data.object);
   }
   catch (err) {
     return {
@@ -15,8 +20,6 @@ exports.handler = async function () {
 
   return {
     statusCode: 200,
-    body: JSON.stringify({
-      data: response
-    })
+    body: JSON.stringify({ response })
   }
 };

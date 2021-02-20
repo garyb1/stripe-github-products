@@ -1,11 +1,13 @@
 const updateGithubFile = require('./utils/updateGithubFile.js');
-exports.handler = async function ({ body, headers }) {
-   console.log({
-        body, headers
-    })
+
+exports.handler = async function ({ body }) {
+  const { data } = JSON.parse(body);
+  const { id } = data.object;
+  
   let response;
+
   try {
-    response = updateGithubFile('test3.json', { test: true });
+    response = await updateGithubFile(`lib/shared/products/${id}.json`, data.object);
   }
   catch (err) {
     return {
@@ -18,8 +20,6 @@ exports.handler = async function ({ body, headers }) {
 
   return {
     statusCode: 200,
-    body: JSON.stringify({
-      data: response
-    })
+    body: JSON.stringify({ response })
   }
 };

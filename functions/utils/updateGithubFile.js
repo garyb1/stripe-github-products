@@ -1,19 +1,22 @@
 const  getFileHash = require('./getFileHash.js');
 const { octokit, owner, repo } = require('./githubConfig.js');
 
-async function updateGithubFile(path, data) {
-    const sha = await getFileHash({ owner, repo, path });
+async function updateGithubFile(path, stripedData) {
+    const { data } = await getFileHash({ owner, repo, path });
+    const { sha } = data;
     const message = `Updating Product Info for File: ${path}`;
-    const dataString = JSON.stringify(data);
-    const dateBase64 = Buffer.from(dataString).toString("base64");
-    await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
+    const dataString = JSON.stringify(stripedData);
+    const content = Buffer.from(dataString).toString("base64");
+    const response = await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
         owner,
         repo,
         path,
         sha,
         message,
-        content: dateBase64
+        content
     });
+
+    return response;
 }
 
 module.exports = updateGithubFile;

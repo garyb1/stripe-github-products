@@ -1,9 +1,11 @@
 import Head from 'next/head'
+import NextLink from 'next/link';
 import styles from '../styles/Home.module.css'
 
-import products from '../shared/products.json';
+import combineProducts from '../lib/combineProducts';
 
-export default function Home() {
+export default function Home({ products }) {
+  console.log(products);
   return (
     <div className={styles.container}>
       <Head>
@@ -11,50 +13,28 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <pre>{JSON.stringify(products, null, 2)}</pre>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
+      <ul>
+          {
+          Object.values(products).map(product => {
+            const { id, name, description } = product;
+            return (
+              <li key={id}>
+                <NextLink href={`/products/${id}`}>
+                  <a>
+                    {/* <img src={image} alt={title} /> */}
+                    <h3>{ name }</h3>
+                    <p>{ description }</p>
+                  </a>
+                </NextLink>
+                <p>
+                  <button>
+                    Buy
+                  </button>
+                </p>
+              </li>
+            )
+          })}
+        </ul>
       <footer className={styles.footer}>
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
@@ -67,4 +47,12 @@ export default function Home() {
       </footer>
     </div>
   )
+}
+
+export const getStaticProps = async () => {
+  return {
+    props: {
+      products: await combineProducts()
+    }
+  }
 }
